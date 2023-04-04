@@ -14,5 +14,5 @@ const kPrimaryGradient = LinearGradient(
 );
 const double kDefaultPadding = 20.0;
 
-const kBackgroundColor = Color(0xFF2D334C);
+const kBackgroundColor = Colors.yellow;
 const kTextColor = Color(0xFF939BBD);

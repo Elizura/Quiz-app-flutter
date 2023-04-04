@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice/constants.dart';
 import 'package:practice/quizpage.dart';
 
 void main() {
@@ -54,7 +55,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(69, 54, 120, 244),
+      backgroundColor: kBackgroundColor,
     );
   }
 }
