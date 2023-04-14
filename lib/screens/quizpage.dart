@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:practice/question_data.dart';
-import 'package:practice/questioncard.dart';
+import 'package:practice/screens/questioncard.dart';
 
-import 'constants.dart';
+import '../constants.dart';
+import '../question_data.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -70,7 +70,10 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(
               height: 10,
             ),
-            QuestionCard(index: index),
+            QuestionCard(
+              index: index,
+              yourchoice: '',
+            ),
           ],
         ),
       )),
@@ -78,26 +81,25 @@ class _QuizPageState extends State<QuizPage> {
   }
 }
 
+// ignore: must_be_immutable
 class QuestionCard extends StatefulWidget {
-  QuestionCard({super.key, required this.index});
+  QuestionCard({super.key, required this.index, required this.yourchoice});
   final int index;
+  String yourchoice;
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
-enum Choices { choice0, choice1, choice2, choice3 }
-
 class _QuestionCardState extends State<QuestionCard> {
+  final List? questions = sample_data;
+  late List choiceAnswer;
+
   @override
   void initState() {
     super.initState();
-    String? _yourchoice;
+    choiceAnswer = List.generate(questions!.length, (index) => null);
   }
-
-  String _yourchoice = '';
-
-  List? questions = sample_data;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,8 @@ class _QuestionCardState extends State<QuestionCard> {
             children: [
               ListTile(
                 tileColor: Colors.white,
-                title: Text(questions?[widget.index].question),
+                title: Text(
+                    '${widget.index}.  ${questions?[widget.index].question}'),
               ),
               Expanded(
                 child: ListView.builder(
@@ -123,19 +126,20 @@ class _QuestionCardState extends State<QuestionCard> {
                     return ListTile(
                       onTap: () {
                         setState(() {
-                          _yourchoice = 'choices${ind}';
+                          choiceAnswer[widget.index] = ind;
                         });
                       },
                       trailing: Radio(
-                          value: 'choices${ind}',
-                          groupValue: _yourchoice,
+                          value: ind,
+                          groupValue: choiceAnswer[widget.index],
                           onChanged: (value) {
                             setState(() {
-                              _yourchoice = 'choices${ind}';
+                              choiceAnswer[widget.index] = ind;
                             });
                           }),
                       tileColor: Colors.white,
-                      title: Text(questions?[widget.index].options[ind]),
+                      title: Text('${String.fromCharCode(ind + 65)}.  ' +
+                          questions?[widget.index].options[ind]),
                     );
                   },
                 ),

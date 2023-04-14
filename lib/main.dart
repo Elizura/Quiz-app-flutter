@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice/constants.dart';
-import 'package:practice/quizpage.dart';
+import 'package:practice/screens/quizpage.dart';
 
 void main() {
   runApp(const MyApp());

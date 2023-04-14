@@ -16,3 +16,4 @@ const double kDefaultPadding = 20.0;
 
 const kBackgroundColor = Colors.yellow;
 const kTextColor = Color(0xFF939BBD);
+const url = 'https://quizapi.io/api/v1/questions';
